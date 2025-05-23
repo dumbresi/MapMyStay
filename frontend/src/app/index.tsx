@@ -1,4 +1,3 @@
-// frontend/pages/index.js (Next.js)
 import { useEffect, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 
@@ -7,10 +6,18 @@ interface Listing {
   lat: number;
   lng: number;
   title: string;
+  image: string;
+  price: number;
+  rating: number;
+  reviews: number;
+  amenities: string[];
+  description: string;
 }
 
 interface MarkerProps {
-  text: string;
+    text: string;
+    lat: number;
+    lng: number;
 }
 
 const Marker: React.FC<MarkerProps> = ({ text }) => <div style={{ color: 'red' }}>📍{text}</div>;
