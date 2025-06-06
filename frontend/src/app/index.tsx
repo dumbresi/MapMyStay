@@ -38,7 +38,7 @@ export default function Home() {
       
     <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY?.toString() || '' }}
+        bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_API_KEY?.toString() || '' }}
         defaultCenter={{ lat: 40.748817, lng: -73.985428 }}
         defaultZoom={13}
       >

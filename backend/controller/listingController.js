@@ -1,5 +1,7 @@
-const Listing = require('../models/Listing');
-const mocklistings = require('../models/listing');
+// const Listing = require('../model/listing');
+// const mocklistings = require('../model/mocklistings');
+import { listing, mocklistings } from '../model/listing.js';
+
 class ListingController {
   async getListings(req, res) {
     try {
@@ -41,4 +43,5 @@ class ListingController {
   }
 }
 
-module.exports = new ListingController();
+
+export default new ListingController();

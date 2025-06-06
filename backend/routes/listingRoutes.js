@@ -1,8 +1,10 @@
-// const express = require('express');
+// routes/listingRoutes.js
+import express from 'express';
+import listingController from '../controller/listingController.js';
+
 const router = express.Router();
-const listingController = require('../controllers/listingController');
 
 router.get('/listings', listingController.getListings);
 router.get('/mocklistings', listingController.getMockList);
 
-module.exports = router;
+export default router;

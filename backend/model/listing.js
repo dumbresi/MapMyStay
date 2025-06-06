@@ -1,25 +1,27 @@
-const axios = require('axios');
+// const axios = require('axios');
 
 class Listing {
   constructor() {
     this.GOOGLE_API_KEY = 'YOUR_GOOGLE_MAPS_API_KEY';
   }
 
-  async getNearbyPlaces(lat, lng, type = 'restaurant', keyword = 'Indian', radius = 500) {
-    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${type}&keyword=${keyword}&key=${this.GOOGLE_API_KEY}`;
+  // async getNearbyPlaces(lat, lng, type = 'restaurant', keyword = 'Indian', radius = 500) {
+  //   const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${type}&keyword=${keyword}&key=${this.GOOGLE_API_KEY}`;
     
-    try {
-      const { data } = await axios.get(url);
-      return data.results.map(r => ({ name: r.name, address: r.vicinity }));
-    } catch (err) {
-      throw new Error(`Failed to fetch nearby places: ${err.message}`);
-    }
-  }
+  //   try {
+  //     const { data } = await axios.get(url);
+  //     return data.results.map(r => ({ name: r.name, address: r.vicinity }));
+  //   } catch (err) {
+  //     throw new Error(`Failed to fetch nearby places: ${err.message}`);
+  //   }
+  // }
 }
 
-module.exports = new Listing();
+export const listing = new Listing();
+// export default listing;
 
-const mocklistings = [
+
+export const mocklistings = [
     {
       id: 1,
       title: "Cozy 2BHK near Downtown",
@@ -49,4 +51,4 @@ const mocklistings = [
     }   
   ];
 
-  export default mocklistings;
+  // export default mocklistings;
