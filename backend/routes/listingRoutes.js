@@ -1,4 +1,3 @@
-// routes/listingRoutes.js
 import express from 'express';
 import listingController from '../controller/listingController.js';
 
