@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import ListingCard from './components/ListingCard'; // adjust path if needed
-import { Listing } from './types/listing'; // adjust path if needed
-
+import ListingCard from './components/ListingCard';
+import { Listing } from './types/listing';
+import MapView from './components/MapView';
 
 
 export default function Home() {
@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Available Listings</h1>
-
+      {!loading && listings.length > 0 && <MapView listings={listings} />}
       {loading ? (
         <p>Loading...</p>
       ) : (
