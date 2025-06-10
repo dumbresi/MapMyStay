@@ -9,9 +9,11 @@ import { Listing } from './types/listing'; // adjust path if needed
 export default function Home() {
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
+  const baseUrl= process.env.NEXT_PUBLIC_BASE_URL
+  console.log(baseUrl)
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/mocklistings')
+    fetch(`${baseUrl}/mocklistings`)
       .then(res => res.json())
       .then(data => {
         setListings(data);
