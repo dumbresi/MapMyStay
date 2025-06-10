@@ -1,5 +1,3 @@
-// const Listing = require('../model/listing');
-// const mocklistings = require('../model/mocklistings');
 import { listing, mocklistings } from '../model/listing.js';
 
 class ListingController {
@@ -39,7 +37,7 @@ class ListingController {
 
   async getMockList(req,res){
     const listing = mocklistings;
-    res.json(listing);
+    res.json(mocklistings);
   }
 }
 

@@ -8,8 +8,10 @@ interface Props {
 export default function ListingCard({ listing }: Props) {
   return (
     <div className="border p-4 rounded-lg shadow hover:shadow-lg transition">
-      <Image src={listing.image_url}
+      <Image src={listing.image}
         alt={listing.title}
+        width={300}
+        height={200}
         className="w-full h-48 object-cover rounded mb-4">
       </Image>
       

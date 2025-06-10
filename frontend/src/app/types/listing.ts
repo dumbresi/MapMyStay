@@ -1,15 +1,19 @@
-export interface NearbyPlace {
+
+  export interface NearbyPlace {
     name: string;
     address: string;
   }
   
   export interface Listing {
-    id: number;
-    title: string;
+    id: string;
     lat: number;
     lng: number;
+    title: string;
+    image: string;
     price: number;
-    image_url: string;
-    nearby: NearbyPlace[];
+    rating: number;
+    reviews: number;
+    amenities: string[];
+    description: string;
+    nearby: NearbyPlace[]; // optional
   }
-  
