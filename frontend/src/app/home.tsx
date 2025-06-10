@@ -4,13 +4,15 @@ import { useEffect, useState } from 'react';
 import ListingCard from './components/ListingCard';
 import { Listing } from './types/listing';
 import MapView from './components/MapView';
+import SearchBar from './components/SearchBar';
 
 
 export default function Home() {
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
   const baseUrl= process.env.NEXT_PUBLIC_BASE_URL
-  console.log(baseUrl)
+ 
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     fetch(`${baseUrl}/mocklistings`)
@@ -25,9 +27,18 @@ export default function Home() {
       });
   }, []);
 
+
+  const handleSearch = () => {
+    if (!query.trim()) return;
+    console.log("User query:", query);
+    // TODO: call LLM agent API here
+  };
+
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Available Listings</h1>
+      <h1 className="text-3xl font-bold mb-6 pb-6">Available Listings</h1>
+
+      <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch} />
       {!loading && listings.length > 0 && <MapView listings={listings} />}
       {loading ? (
         <p>Loading...</p>
