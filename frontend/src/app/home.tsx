@@ -28,10 +28,25 @@ export default function Home() {
   }, []);
 
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!query.trim()) return;
-    console.log("User query:", query);
-    // TODO: call LLM agent API here
+  
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_NGROCK_URL}/query`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_query: query }),
+      });
+  
+      const data = await res.json();
+      console.log("Agent response:", data);
+  
+      // For now, show message. Later: setListings(data.filteredListings)
+      alert(data.result); 
+    } catch (error) {
+      console.error("Failed to contact LLM agent:", error);
+      alert("Something went wrong.");
+    }
   };
 
   return (
