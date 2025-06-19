@@ -39,6 +39,20 @@ export default function Home() {
     }
   };
 
+  const handleClear = async () => {
+    setQuery('');
+    setLoading(true);
+    try {
+      const res = await fetch(`${baseUrl}/mocklistings`);
+      const data = await res.json();
+      setListings(data);
+      setLoading(false);
+    } catch (err) {
+      console.error('Failed to fetch listings:', err);
+      setLoading(false);
+    }
+  };
+
   const handleSearch = async () => {
     if (!query.trim()) return;
     setLoading(true); 
@@ -64,22 +78,24 @@ export default function Home() {
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6 pb-6">Available Listings</h1>
-  
-      <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch} />
-  
-      <div className="flex flex-col md:flex-row gap-6 min-h-screen">
-        {/* Map always visible and full height */}
-        <div className="md:w-1/2 h-[80vh]">
-          <MapView listings={listings} onMarkerClick={handleMarkerClick} />
+      <div className="w-full px-6 py-4 border-b shadow-sm flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-red-500 tracking-tight">MapMyStay</h1>
+        <div className="flex items-center gap-4 text-sm text-gray-600">
+          <button className="hover:underline">Become a host</button>
+          <button className="hover:underline">Help</button>
+          <button className="hover:underline">Login</button>
         </div>
-
-        {/* Listings section */}
-        <div className="md:w-1/2 overflow-y-auto">
+      </div>
+  
+      <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch} onClear={handleClear} />
+  
+      <div className="flex h-[calc(100vh-64px)] overflow-hidden">
+        {/* Left side - Listings */}
+        <div className="w-full md:w-1/2 overflow-y-auto p-6 space-y-4">
           {loading ? (
-            <p className="text-center mt-6 text-gray-600">Loading listings...</p>
-          ) : listings.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+            <p>Loading...</p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
               {listings.map((listing) => (
                 <div
                   key={listing.id}
@@ -91,12 +107,16 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          ) : (
-            <p className="text-center mt-6 text-gray-500">No listings found.</p>
           )}
         </div>
+
+        {/* Right side - Map */}
+        <div className="hidden md:block md:w-1/2 h-full sticky top-0">
+          <MapView listings={listings} onMarkerClick={handleMarkerClick} />
+        </div>
       </div>
-    </div>
+
+      </div>
   );
   
 }
