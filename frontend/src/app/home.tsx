@@ -41,7 +41,7 @@ export default function Home() {
 
   const handleSearch = async () => {
     if (!query.trim()) return;
-  
+    setLoading(true); 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_NGROCK_URL}/query`, {
         method: "POST",
@@ -57,30 +57,46 @@ export default function Home() {
     } catch (error) {
       console.error("Failed to contact LLM agent:", error);
       alert("Something went wrong.");
+    }finally{
+      setLoading(false);
     }
   };
 
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6 pb-6">Available Listings</h1>
-
+  
       <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch} />
-      {!loading && listings.length > 0 && <MapView listings={listings} onMarkerClick={handleMarkerClick} />}
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {listings.map(listing => (
-            <div
-            ref={el => {
-              if (el) listingRefs.current[Number(listing.id)] = el;
-            }}
-          >
-            <ListingCard listing={listing} />
-            </div>
-          ))}
+  
+      <div className="flex flex-col md:flex-row gap-6 min-h-screen">
+        {/* Map always visible and full height */}
+        <div className="md:w-1/2 h-[80vh]">
+          <MapView listings={listings} onMarkerClick={handleMarkerClick} />
         </div>
-      )}
+
+        {/* Listings section */}
+        <div className="md:w-1/2 overflow-y-auto">
+          {loading ? (
+            <p className="text-center mt-6 text-gray-600">Loading listings...</p>
+          ) : listings.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+              {listings.map((listing) => (
+                <div
+                  key={listing.id}
+                  ref={(el) => {
+                    if (el) listingRefs.current[Number(listing.id)] = el;
+                  }}
+                >
+                  <ListingCard listing={listing} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center mt-6 text-gray-500">No listings found.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
+  
 }
