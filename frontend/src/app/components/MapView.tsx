@@ -3,6 +3,7 @@ import { Listing } from "../types/listing";
 
 interface Props {
   listings: Listing[];
+  onMarkerClick: (id: string) => void;
 }
 
 const containerStyle = {
@@ -15,7 +16,7 @@ const center = {
   lng: -73.985428,
 };
 
-export default function MapView({ listings }: Props) {
+export default function MapView({ listings,onMarkerClick }: Props) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
   });
@@ -30,6 +31,7 @@ export default function MapView({ listings }: Props) {
             key={listing.id}
             position={{ lat: listing.lat, lng: listing.lng }}
             title={listing.title}
+            onClick={() => onMarkerClick(listing.id)}
           />
         ))}
       </GoogleMap>

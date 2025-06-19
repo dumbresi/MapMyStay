@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState ,useRef} from 'react';
 import ListingCard from './components/ListingCard';
 import { Listing } from './types/listing';
 import MapView from './components/MapView';
@@ -13,6 +13,7 @@ export default function Home() {
   const baseUrl= process.env.NEXT_PUBLIC_BASE_URL
  
   const [query, setQuery] = useState('');
+  const listingRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
 
   useEffect(() => {
     fetch(`${baseUrl}/mocklistings`)
@@ -27,6 +28,16 @@ export default function Home() {
       });
   }, []);
 
+  const handleMarkerClick = (id: string) => {
+    const el = listingRefs.current[parseInt(id)];
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      el.classList.add("ring-4", "ring-blue-400");
+  
+      // Remove highlight after a short delay
+      setTimeout(() => el.classList.remove("ring-4", "ring-blue-400"), 1500);
+    }
+  };
 
   const handleSearch = async () => {
     if (!query.trim()) return;
@@ -39,10 +50,10 @@ export default function Home() {
       });
   
       const data = await res.json();
-      console.log("Agent response:", data);
-  
-      // For now, show message. Later: setListings(data.filteredListings)
-      alert(data.result); 
+    console.log("Agent response:", data);
+
+    setListings(data.listings); // <-- use filtered listings
+    setLoading(false); 
     } catch (error) {
       console.error("Failed to contact LLM agent:", error);
       alert("Something went wrong.");
@@ -54,13 +65,19 @@ export default function Home() {
       <h1 className="text-3xl font-bold mb-6 pb-6">Available Listings</h1>
 
       <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch} />
-      {!loading && listings.length > 0 && <MapView listings={listings} />}
+      {!loading && listings.length > 0 && <MapView listings={listings} onMarkerClick={handleMarkerClick} />}
       {loading ? (
         <p>Loading...</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {listings.map(listing => (
-            <ListingCard key={listing.id} listing={listing} />
+            <div
+            ref={el => {
+              if (el) listingRefs.current[Number(listing.id)] = el;
+            }}
+          >
+            <ListingCard listing={listing} />
+            </div>
           ))}
         </div>
       )}
