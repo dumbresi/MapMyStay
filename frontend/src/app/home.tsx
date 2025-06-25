@@ -66,7 +66,7 @@ export default function Home() {
       const data = await res.json();
     console.log("Agent response:", data);
 
-    setListings(data.listings); // <-- use filtered listings
+    setListings(data.listings); 
     setLoading(false); 
     } catch (error) {
       console.error("Failed to contact LLM agent:", error);
