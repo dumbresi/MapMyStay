@@ -16,7 +16,7 @@ export default function Home() {
   const listingRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
 
   useEffect(() => {
-    fetch(`${baseUrl}/mocklistings`)
+    fetch(`${baseUrl}/listings`)
       .then(res => res.json())
       .then(data => {
         setListings(data);
