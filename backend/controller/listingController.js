@@ -67,8 +67,16 @@ const deleteListing = async (req, res) => {
   }
 };
 
+const getListingById = async (req, res) => {
+  const id = parseInt(req.params.id);
+  const listing = mocklistings.find(l => l.id === id);
+  if (!listing) return res.status(404).json({ message: "Listing not found" });
+  res.json(listing);
+};
+
 export default {
   getListings,
+  getListingById,
   getMockList,
   createListing,
   updateListing,
