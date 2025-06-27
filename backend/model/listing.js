@@ -1,4 +1,21 @@
-export const listing = null;
+import { DataTypes } from 'sequelize';
+import sequelize from '../db/db.js';
+
+const Listing = sequelize.define('Listing', {
+  title: DataTypes.STRING,
+  lat: DataTypes.FLOAT,
+  lng: DataTypes.FLOAT,
+  image: DataTypes.STRING,
+  price: DataTypes.INTEGER,
+  rating: DataTypes.FLOAT,
+  reviews: DataTypes.INTEGER,
+  amenities: DataTypes.ARRAY(DataTypes.STRING),
+  description: DataTypes.TEXT,
+  isAvailable: DataTypes.BOOLEAN,
+});
+
+export default Listing;
+
 
 
 
