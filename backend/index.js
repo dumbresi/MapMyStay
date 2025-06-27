@@ -3,9 +3,11 @@ import cors from 'cors';
 import listingRoutes from './routes/listingRoutes.js';
 import sequelize from './db/db.js';
 import Listing from './model/listing.js'; // Import to ensure model gets registered
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(express.json()); // Needed to parse POST body
