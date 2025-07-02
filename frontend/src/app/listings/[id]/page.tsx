@@ -8,7 +8,7 @@ export default async function ListingDetailPage({
 }: {
   params: { id: string };
 }) {
-  const res = await fetch(`http://localhost:3001/api/listings/${params.id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${params.id}`, {
     cache: "no-store",
   });
 
@@ -19,9 +19,9 @@ export default async function ListingDetailPage({
 
   return (
     <div className="max-w-5xl mx-auto p-6">
-      {/* Main section */}
+      
       <div className="flex flex-col md:flex-row gap-8">
-        {/* Image Left */}
+       
         <div className="md:w-1/2 w-full">
           <Image
             src={listing.image}
@@ -32,14 +32,14 @@ export default async function ListingDetailPage({
           />
         </div>
 
-        {/* Details Right */}
+        
         <div className="md:w-1/2 w-full">
           <h1 className="text-2xl font-bold mb-2">{listing.title}</h1>
           <p className="text-green-600 font-semibold text-lg mb-2">
             ${listing.price}/night
           </p>
 
-          {/* Rating with stars */}
+          
           <div className="flex items-center mb-2">
             {Array.from({ length: 5 }).map((_, i) => (
               <svg

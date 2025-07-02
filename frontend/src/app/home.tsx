@@ -82,7 +82,7 @@ export default function Home() {
       <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch} onClear={handleClear} />
   
       <div className="flex h-[calc(100vh-64px)] overflow-hidden">
-        {/* Left side - Listings */}
+        
         <div className="w-full md:w-1/2 overflow-y-auto p-6 space-y-4">
           {loading ? (
             <p>Loading...</p>
@@ -102,7 +102,7 @@ export default function Home() {
           )}
         </div>
 
-        {/* Right side - Map */}
+        
         <div className="hidden md:block md:w-1/2 h-full sticky top-0">
           <MapView listings={listings} onMarkerClick={handleMarkerClick} />
         </div>

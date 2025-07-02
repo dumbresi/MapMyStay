@@ -1,7 +1,7 @@
 import Listing from '../model/listing.js';
 import { mocklistings } from '../model/listing.js';
 
-// Get all listings from DB
+
 const getListings = async (req, res) => {
   try {
     const listings = await Listing.findAll();
@@ -12,7 +12,6 @@ const getListings = async (req, res) => {
   }
 };
 
-// For compatibility: return mock-style listings if needed (optional)
 const getMockList = async (req, res) => {
   try {
     const listings = mocklistings;
@@ -23,7 +22,7 @@ const getMockList = async (req, res) => {
   }
 };
 
-// Create a new listing
+
 const createListing = async (req, res) => {
   try {
     const newListing = await Listing.create(req.body);
@@ -34,7 +33,7 @@ const createListing = async (req, res) => {
   }
 };
 
-// Update listing by ID
+
 const updateListing = async (req, res) => {
   const { id } = req.params;
   try {
@@ -51,7 +50,7 @@ const updateListing = async (req, res) => {
   }
 };
 
-// Delete listing by ID
+
 const deleteListing = async (req, res) => {
   const { id } = req.params;
   try {

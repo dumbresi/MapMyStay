@@ -1,4 +1,3 @@
-// app/components/Navbar.tsx
 "use client";
 
 export default function Navbar() {
