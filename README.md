@@ -65,10 +65,19 @@ npm install
 # Create a .env.local file in frontend with API URLs
 npm run dev
 
-```bash
+```
 
 ## Features
 
 - 🔍 Natural language filtering for listings
 - 📍 Map-based listing visualization
 - 🧠 LLM-powered intelligent search
+
+## 👤 Author
+
+**Siddharth Dumbre**  
+[LinkedIn](https://www.linkedin.com/in/siddharth-dumbre) · [GitHub](https://github.com/dumbresi)
+
+## 📜 License
+
+Licensed under the [MIT License](https://opensource.org/licenses/MIT).
