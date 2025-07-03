@@ -51,10 +51,8 @@
 ### Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/mapmystay.git
-cd mapmystay
+git clone https://github.com/dumbresi/mapmystay.git
 # Navigate to each folder and install dependencies
-
 cd backend
 npm install
 # Create a .env file in backend with DB and API keys
