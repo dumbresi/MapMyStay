@@ -2,6 +2,8 @@
 
 **MapMyStay** is an AI-powered accommodation discovery app that lets users find listings using natural language queries. It integrates Google Maps and OpenAI-powered agents to filter stays by proximity (like “Close to Indian restaurants, Near a Park”) and custom amenities (like “balcony” or “gym”) — making travel planning easier and smarter.
 
+[See Working Demo](https://www.linkedin.com/posts/siddharth-dumbre_ai-nextjs-mistral-activity-7346306560865787905-XMxw)
+
 ---
 ![Alt text](image/mainpage.png)
 
